@@ -27,7 +27,7 @@ int main() {
   char operators[] = {'/','*','+','-'};
   
   printf("Calculate: ");
-  scanf("%[.0123456789/*+-]s", expression);
+  scanf("%[.0-9/*+-]s", expression);
   
   int div  [3] = {};
   int times[3] = {};
