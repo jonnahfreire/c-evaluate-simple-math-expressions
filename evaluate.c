@@ -79,7 +79,14 @@ int main() {
 
 
   printf("Result: %s\n", (expression));
-  system("pause");
+  #ifdef _WIN32
+    system("pause");
+  #else
+    #if __linux__
+      getchar();
+    #endif
+  #endif // _WIN32
+
   return 0;
  }
 
