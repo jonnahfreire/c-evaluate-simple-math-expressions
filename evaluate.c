@@ -4,7 +4,8 @@
 
 /*
 
-C program to solve simple math expressions
+C program to solve simple math expressions,
+using the four basic operations.
 
 Author: Jonas Freire
 
