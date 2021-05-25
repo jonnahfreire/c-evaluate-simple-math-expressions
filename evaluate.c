@@ -7,7 +7,6 @@
 C program to solve simple math expressions
 
 Author: Jonas Freire
-Date: 24/04/2021
 
 Github: jonnahfreire
 
