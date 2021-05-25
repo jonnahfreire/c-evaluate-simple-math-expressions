@@ -27,14 +27,14 @@ int main() {
   char expression[100] = "";
   char operators[] = {'/','*','+','-'};
   char temp[100];
+	
+  memset(temp, '\0', 100);
+  memset(expression, '\0', 100);
 
-	memset(temp, '\0', 100);
-	memset(expression, '\0', 100);
+  printf("Calculate: ");
+  scanf("%[ 0-9.,/*+-]s", temp);
 
-	printf("Calculate: ");
-	scanf("%[ 0-9.,/*+-]s", temp);
-
-	sanitize(temp, expression);
+  sanitize(temp, expression);
   
   int div  [3] = {};
   int times[3] = {};
