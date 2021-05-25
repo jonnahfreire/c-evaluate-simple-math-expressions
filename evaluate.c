@@ -72,7 +72,7 @@ int main() {
 
 
   printf("Result: %s\n", (expression));
-
+  system("pause");
   return 0;
  }
 
