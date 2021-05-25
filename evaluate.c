@@ -27,9 +27,6 @@ int main() {
   char expression[100] = "";
   char operators[] = {'/','*','+','-'};
   char temp[100];
-	
-  memset(temp, '\0', 100);
-  memset(expression, '\0', 100);
 
   printf("Calculate: ");
   scanf("%[ 0-9.,/*+-]s", temp);
@@ -200,8 +197,10 @@ void* setNumberElement(char exp, char* n){
 
 char* getResult(char* expression, char oper, int operPos){
     int i;
-    char num1[100]="";
-    char num2[100]="";
+    char num1[strlen(expression)];
+    char num2[strlen(expression)];
+    memset(num1, '\0', strlen(expression));
+    memset(num2, '\0', strlen(expression));
 
     int n1StartPos = getOperStartPos(operPos, expression);
     int n2StartPos = operPos + 1;
@@ -284,8 +283,8 @@ void* updateOperators(char* exp, int* oper[]){
 
 void* sanitize(char* temp, char* expression){
     int i;
-    char t[100];
-    memset(t, '\0', 100);
+    char t[strlen(temp)];
+    memset(t, '\0', strlen(temp));
 
     //takeoff spaces
     for(i = 0; i < strlen(temp); i++){
