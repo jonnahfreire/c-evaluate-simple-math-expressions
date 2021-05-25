@@ -16,10 +16,10 @@ Github: jonnahfreire
 
 char *concat(char* str1, char* str2);
 char* replaceResolvedExpression(char* exp, char* res, int operStartPos, int operEndPos);
-int* getOperStartPos(int operpos, char* exp);
-int* getOperEndPos(int operpos, char* exp);
-void* setNumberElement(char* exp, char* n);
-char* getResult(char* expression, char* oper, int operPos);
+int getOperStartPos(int operpos, char* exp);
+int getOperEndPos(int operpos, char* exp);
+void* setNumberElement(char exp, char* n);
+char* getResult(char* expression, char oper, int operPos);
 void* updateOperators(char* exp, int* oper[]);
 
 int main() {
@@ -136,7 +136,7 @@ char* replaceResolvedExpression(char* exp, char* res, int operStartPos, int oper
     return concat(newExp, "");
 }
 
-int* getOperStartPos(int operpos, char* exp){
+int getOperStartPos(int operpos, char* exp){
   int operStartPos, i;
   for(i = operpos-1; i >= 0; i--){
     if(exp[i] == '+'
@@ -153,7 +153,7 @@ int* getOperStartPos(int operpos, char* exp){
   return operStartPos;
 }
 
-int* getOperEndPos(int operpos, char* exp){
+int getOperEndPos(int operpos, char* exp){
   int operEndPos, i;
   for(i = operpos+1; i < strlen(exp); i++){
     if(exp[i] == '+'
@@ -170,7 +170,7 @@ int* getOperEndPos(int operpos, char* exp){
   return operEndPos;
 }
 
-void* setNumberElement(char* exp, char* n){
+void* setNumberElement(char exp, char* n){
     if(exp == '.')strcat(n, ".");
     if(exp == '0')strcat(n, "0");
     if(exp == '1')strcat(n, "1");
@@ -184,7 +184,7 @@ void* setNumberElement(char* exp, char* n){
     if(exp == '9')strcat(n, "9");
 }
 
-char* getResult(char* expression, char* oper, int operPos){
+char* getResult(char* expression, char oper, int operPos){
     int i;
     char num1[100]="";
     char num2[100]="";
