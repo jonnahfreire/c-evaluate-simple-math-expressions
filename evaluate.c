@@ -21,13 +21,20 @@ int getOperEndPos(int operpos, char* exp);
 void* setNumberElement(char exp, char* n);
 char* getResult(char* expression, char oper, int operPos);
 void* updateOperators(char* exp, int* oper[]);
+void* sanitize(char* temp, char* expression);
 
 int main() {
   char expression[100] = "";
   char operators[] = {'/','*','+','-'};
-  
-  printf("Calculate: ");
-  scanf("%[.0-9/*+-]s", expression);
+  char temp[100];
+
+	memset(temp, '\0', 100);
+	memset(expression, '\0', 100);
+
+	printf("Calculate: ");
+	scanf("%[ 0-9.,/*+-]s", temp);
+
+	sanitize(temp, expression);
   
   int div  [3] = {};
   int times[3] = {};
@@ -266,4 +273,27 @@ void* updateOperators(char* exp, int* oper[]){
             }
         }
     }
+}
+
+void* sanitize(char* temp, char* expression){
+    int i;
+    char t[100];
+    memset(t, '\0', 100);
+
+    //takeoff spaces
+    for(i = 0; i < strlen(temp); i++){
+        if(temp[i] != 32){
+            t[strlen(t)] = temp[i];
+        }else if(temp[i] == '\0'){break;}
+
+    }
+
+    // takeoff commas
+    for(i = 0; i < strlen(t); i++){
+        if(t[i] == ','){
+            t[i] = '.';
+        }
+    }
+
+    strcpy(expression, t);
 }
