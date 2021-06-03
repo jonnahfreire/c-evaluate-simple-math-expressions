@@ -23,16 +23,13 @@ char* getResult(char* expression, char oper, int operPos);
 void updateOperators(char* exp, int* oper[]);
 void sanitize(char* temp, char* expression);
 void eval(int pos, char op);
+void wait(int time);
+void wait(int time);
 
 
 int main() {
-    #ifdef _WIN32
-	    system("cls");
-	#else
-        #if __linux__
-            system("clear");
-        #endif
-    #endif
+    clear();
+
 
 	char temp[100];
 	char expression[strlen(temp)];
@@ -60,13 +57,9 @@ int main() {
 
         printf("Por favor insira pelo menos uma expressao!\n");
         fflush(stdin);
-        #ifdef _WIN32
-            Sleep(2000);
-        #else
-            #if __linux__
-                sleep(2000);
-            #endif
-        #endif
+
+        wait(2000);
+
         main();
     }
 
@@ -115,22 +108,25 @@ int main() {
     scanf("%c", &resp);
     fflush(stdin);
 
-    if((resp == 's') || (resp == 'S')) main();
-    else printf("Saindo...\n\n");
-
+    if((resp == 's') || (resp == 'S')){
+        main();
+    } else {
+        printf("Saindo...\n\n");
+        wait(2000);
+    }
     return 0;
  }
 
 
 char* replaceResolvedExpression(char* exp, char* res, int operStartPos, int operEndPos){
+    int i, e;
     char expLastPart[100]="";
     char newExp[100]="";
     char opers[] = {
-      '.','0','1','2','3',
-      '4','5','6','7','8',
-      '9','/','*','+','-'};
-    
-    int i, e;
+    '.','0','1','2','3',
+    '4','5','6','7','8',
+    '9','/','*','+','-'};
+
     for(i = 0; i < strlen(exp); i++){
         for(e = 0; e < strlen(opers); e++){
              if(exp[i] == opers[e]){
@@ -229,9 +225,10 @@ void setNumberElement(char exp, char* n){
 }
 
 char* getResult(char* expression, char oper, int operPos){
-    char num1[strlen(expression)];memset(num1, '\0', strlen(expression));
-    char num2[strlen(expression)];memset(num2, '\0', strlen(expression));
+    char num1[strlen(expression)]; memset(num1, '\0', strlen(expression));
+    char num2[strlen(expression)]; memset(num2, '\0', strlen(expression));
     int i;
+
     int n1StartPos = getOperStartPos(operPos, expression);
     int n2StartPos = operPos + 1;
 
@@ -253,10 +250,11 @@ char* getResult(char* expression, char oper, int operPos){
     }
 
     char* endPtr;
-    char stringRes[100];
     float n1 = strtod(num1, &endPtr);
     float n2 = strtod(num2, &endPtr);
     float res;
+
+    char stringRes[100];
 
     if(oper == 47) res = n1 / n2;
     if(oper == 42) res = n1 * n2;
@@ -268,7 +266,7 @@ char* getResult(char* expression, char oper, int operPos){
 
     if(stringRes[strlen(stringRes) - 3] == '.'){
         if(stringRes[strlen(stringRes) - 2] == '0' && stringRes[strlen(stringRes) - 1] == '0'){
-            for(i = strlen(stringRes) - 3; i < strlen(stringRes); i++){
+            for( i = strlen(stringRes) - 3; i < strlen(stringRes); i++){
                 stringRes[i] = '\0';
             }
         }
@@ -325,4 +323,25 @@ void sanitize(char* temp, char* expression){
     if(t[i] == ',') t[i] = '.';
 
     strcpy(expression, t);
+}
+
+void clear() {
+    #ifdef _WIN32
+	    system("cls");
+	#else
+        #if __linux__
+            system("clear");
+        #endif
+    #endif
+}
+
+
+void wait(int time) {
+    #ifdef _WIN32
+	    Sleep(time);
+	#else
+        #if __linux__
+            sleep(time);
+        #endif
+    #endif
 }
