@@ -35,10 +35,10 @@ int main() {
     int i;
 
     for(i=0;i<30;i++)printf("-");
-	printf("\nCalcule: ");
-	scanf("%[ 0-9.,/*+-]s", temp);
+    printf("\nCalcule: ");
+    scanf("%[ 0-9.,/*+-]s", temp);
 
-	sanitize(temp, expression);
+    sanitize(temp, expression);
 
     int div  [3] = {};
     int times[3] = {};
