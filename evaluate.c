@@ -24,15 +24,14 @@ void updateOperators(char* exp, int* oper[]);
 void sanitize(char* temp, char* expression);
 void eval(int pos, char op);
 void wait(int time);
-void wait(int time);
+void clear();
 
 
 int main() {
     clear();
 
-
-	char temp[100];
-	char expression[strlen(temp)];
+    char temp[100];
+    char expression[strlen(temp)];
     int i;
 
     for(i=0;i<30;i++)printf("-");
@@ -42,8 +41,8 @@ int main() {
 	sanitize(temp, expression);
 
     int div  [3] = {};
-	int times[3] = {};
-	int plus [3] = {};
+    int times[3] = {};
+    int plus [3] = {};
     int minus[3] = {};
 
     int* opers[5] = {div, times, plus, minus};
@@ -57,14 +56,9 @@ int main() {
 
         printf("Por favor insira pelo menos uma expressao!\n");
         fflush(stdin);
-
         wait(2000);
-
         main();
     }
-
-
-
 
     void eval(int pos, char op){
         char res[100] = "";
@@ -179,35 +173,35 @@ char *concat(char* str1, char* str2) {
 int getOperStartPos(int operpos, char* exp){
     int operStartPos, i;
     for(i = operpos-1; i >= 0; i--){
-		if(exp[i] == '+'
-		|| exp[i] == '-'
-		|| exp[i] == '*'
-		|| exp[i] == '/'
-		|| exp[i] == '\0'
-		){
-			break;
-		}else{
-			operStartPos = i;
-		}
+	if(exp[i] == '+'
+	|| exp[i] == '-'
+	|| exp[i] == '*'
+	|| exp[i] == '/'
+	|| exp[i] == '\0'
+	){
+		break;
+	}else{
+		operStartPos = i;
 	}
-	return operStartPos;
+    }
+    return operStartPos;
 }
 
 int getOperEndPos(int operpos, char* exp){
     int operEndPos, i;
     for(i = operpos+1; i < strlen(exp); i++){
-		if(exp[i] == '+'
-		|| exp[i] == '-'
-		|| exp[i] == '*'
-		|| exp[i] == '/'
-		|| exp[i] == '\0'
-		){
-			break;
-		}else{
-			operEndPos = i;
-		}
+	if(exp[i] == '+'
+	|| exp[i] == '-'
+	|| exp[i] == '*'
+	|| exp[i] == '/'
+	|| exp[i] == '\0'
+	){
+		break;
+	}else{
+		operEndPos = i;
 	}
-	return operEndPos;
+    }
+    return operEndPos;
 }
 
 void setNumberElement(char exp, char* n){
